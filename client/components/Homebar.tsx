@@ -6,7 +6,7 @@ export default function Homebar() {
             <ul className="flex flex-col justify-center items-center">
                 <li className="mb-2 md:p-4"><img src="/img/logo.png" /></li>
                 <li className="mb-2 md:p-4 text-lg">Home</li>
-                <li className="mb-2 md:p-4 text-lg">NBA</li>
+                <li className="mb-2 md:p-4 text-lg"><a href="/nba">NBA</a></li>
                 <li className="mb-2 md:p-4 text-lg">MLB</li>
             </ul>
         </div>
