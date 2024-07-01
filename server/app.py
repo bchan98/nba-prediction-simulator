@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 
 # A simple route to test the server
@@ -13,8 +15,6 @@ def home():
 @app.route("/api/start-match", methods=["POST"])
 def start_match():
     data = request.json
-    if data is None:
-        return jsonify({"error": "No JSON data provided"}), 400
     team1_id = data.get("team1Id")
     team2_id = data.get("team2Id")
 
@@ -30,3 +30,4 @@ def start_match():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
