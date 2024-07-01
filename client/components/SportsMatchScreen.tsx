@@ -2,25 +2,15 @@
 // SportsMatchScreen.tsx
 import React, { useState } from 'react';
 import TeamSelect from './TeamSelect';
+import teamsdata from './teams.json';
 
-const teams = [
-    {
-        id: 1,
-        name: 'Philadelphia 76ers',
-        logoSrc: '/img/logos/76ers.png',
-    },
-    {
-        id: 2,
-        name: 'Milwaukee Bucks',
-        logoSrc: '/img/logos/bucks.png',
-    },
-    {
-        id: 3,
-        name: 'Chicago Bulls',
-        logoSrc: '/img/logos/bulls.png'
-    },
-    // Add more teams as needed
-];
+type Team = {
+    id: number;
+    name: string;
+    logoSrc: string;
+}
+
+const teams: Team[] = teamsdata as Team[]
 
 export default function SportsMatchScreen() {
     const [team1, setTeam1] = useState<any>(null);

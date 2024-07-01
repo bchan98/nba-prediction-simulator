@@ -39,7 +39,7 @@ export default function TeamSelect({ teams, onSelectTeams }: TeamSelectProps) {
             onSelectTeams(team1, team2);
 
             // Sending the selected teams' IDs to the API endpoint
-            axios.post('/api/start-match', {
+            axios.post('http://127.0.0.1:5000/api/start-match', {
                 team1Id: team1.id,
                 team2Id: team2.id,
             })
@@ -111,3 +111,4 @@ export default function TeamSelect({ teams, onSelectTeams }: TeamSelectProps) {
         </div>
     );
 }
+
