@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 type Team = {
     id: number;
@@ -23,6 +22,9 @@ export default function TeamSelect({ teams, onSelectTeams }: TeamSelectProps) {
         if (team2 && selectedTeam && team2.id === selectedTeam.id) {
             setTeam2(null); // Prevent selecting the same team for both slots
         }
+        if (selectedTeam && team2) {
+            onSelectTeams(selectedTeam, team2);
+        }
     };
 
     const handleSelectTeam2 = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -32,23 +34,8 @@ export default function TeamSelect({ teams, onSelectTeams }: TeamSelectProps) {
         if (team1 && selectedTeam && team1.id === selectedTeam.id) {
             setTeam1(null); // Prevent selecting the same team for both slots
         }
-    };
-
-    const handleStartMatch = () => {
-        if (team1 && team2) {
-            onSelectTeams(team1, team2);
-
-            // Sending the selected teams' IDs to the API endpoint
-            axios.post('http://127.0.0.1:5000/api/start-match', {
-                team1Id: team1.id,
-                team2Id: team2.id,
-            })
-                .then(response => {
-                    console.log('Match started successfully:', response.data);
-                })
-                .catch(error => {
-                    console.error('Error starting match:', error);
-                });
+        if (team1 && selectedTeam) {
+            onSelectTeams(team1, selectedTeam);
         }
     };
 
@@ -100,14 +87,6 @@ export default function TeamSelect({ teams, onSelectTeams }: TeamSelectProps) {
                     />
                 )}
             </div>
-            {team1 && team2 && (
-                <button
-                    className="mt-8 px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
-                    onClick={handleStartMatch}
-                >
-                    Start Match
-                </button>
-            )}
         </div>
     );
 }

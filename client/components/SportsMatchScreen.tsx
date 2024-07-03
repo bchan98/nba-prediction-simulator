@@ -1,47 +1,60 @@
-"use client"
-// SportsMatchScreen.tsx
+'use client';
+
 import React, { useState } from 'react';
-import TeamSelect from './TeamSelect';
-import teamsdata from './teams.json';
+import axios from 'axios';
+import TeamSelect from '../components/TeamSelect';
+import teamsData from '../components/teams.json'; // Import teams.json data
 
 type Team = {
     id: number;
     name: string;
     logoSrc: string;
-}
+};
 
-const teams: Team[] = teamsdata as Team[]
+const teams: Team[] = teamsData; // Assign imported JSON data to a variable
 
 export default function SportsMatchScreen() {
-    const [team1, setTeam1] = useState<any>(null);
-    const [team2, setTeam2] = useState<any>(null);
+    const [team1, setTeam1] = useState<Team | null>(null);
+    const [team2, setTeam2] = useState<Team | null>(null);
+    const [winner, setWinner] = useState<Team | null>(null);
 
-    const handleSelectTeams = (tm1: any, tm2: any) => {
-        setTeam1(tm1);
-        setTeam2(tm2);
+    const handleSelectTeams = (team1: Team, team2: Team) => {
+        setTeam1(team1);
+        setTeam2(team2);
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-gray-200">
-            <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center space-y-8 w-2/3">
-                <div className="flex justify-center w-full">
-                    {team1 && (
-                        <img
-                            src={team1.logoSrc}
-                            alt={team1.name}
-                            className="w-32 h-32 rounded-full border-4 border-blue-500 object-contain"
-                        />
-                    )}
-                    {team2 && (
-                        <img
-                            src={team2.logoSrc}
-                            alt={team2.name}
-                            className="w-32 h-32 rounded-full border-4 border-red-500 object-contain"
-                        />
-                    )}
+        <div className="flex flex-col items-center space-y-4">
+            <TeamSelect teams={teams} onSelectTeams={handleSelectTeams} />
+            {team1 && team2 && (
+                <button
+                    className="mt-8 px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
+                    onClick={() => {
+                        axios.get(`http://127.0.0.1:5000/api/get-winner?team1Id=${team1.id}&team2Id=${team2.id}`)
+                            .then(response => {
+                                console.log('Match winner:', response.data);
+                                if (response.data === String(team1.id)) {
+                                    setWinner(team1);
+                                }
+                                else {
+                                    setWinner(team2);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error getting match winner:', error);
+                            });
+                    }}
+                >
+                    Start Match
+                </button>
+            )}
+            {winner && (
+                <div className="mt-8 text-center">
+                    <img src={winner.logoSrc} alt={winner.name} className="w-48 h-48 rounded-full mx-auto object-contain border-black border-4" />
+                    <p className="mt-2 text-lg font-semibold text-green-600">Winner!</p>
                 </div>
-                <TeamSelect teams={teams} onSelectTeams={handleSelectTeams} />
-            </div>
+            )}
         </div>
     );
 }
+
