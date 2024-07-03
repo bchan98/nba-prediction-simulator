@@ -2,7 +2,7 @@ import joblib
 import pandas as pd
 from nba_api.stats.endpoints import leaguedashteamstats
 
-modelPath = "/model.pkl"
+modelPath = "model.pkl"
 predictors = [
     "PTS_home_rolling",
     "FG_PCT_home_rolling",
