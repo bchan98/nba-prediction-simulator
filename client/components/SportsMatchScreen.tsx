@@ -23,27 +23,29 @@ export default function SportsMatchScreen() {
         setTeam2(team2);
     };
 
+    function determineWinner() {
+        axios.get(`http://127.0.0.1:5000/api/get-winner?team1Id=${team1.id}&team2Id=${team2.id}`)
+            .then(response => {
+                console.log('Match winner:', response.data);
+                if (response.data === String(team1.id)) {
+                    setWinner(team1);
+                }
+                else {
+                    setWinner(team2);
+                }
+            })
+            .catch(error => {
+                console.error('Error getting match winner:', error);
+            });
+    }
+
     return (
         <div className="flex flex-col items-center space-y-4">
             <TeamSelect teams={teams} onSelectTeams={handleSelectTeams} />
             {team1 && team2 && (
                 <button
                     className="mt-8 px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
-                    onClick={() => {
-                        axios.get(`http://127.0.0.1:5000/api/get-winner?team1Id=${team1.id}&team2Id=${team2.id}`)
-                            .then(response => {
-                                console.log('Match winner:', response.data);
-                                if (response.data === String(team1.id)) {
-                                    setWinner(team1);
-                                }
-                                else {
-                                    setWinner(team2);
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Error getting match winner:', error);
-                            });
-                    }}
+                    onClick={determineWinner}
                 >
                     Start Match
                 </button>
@@ -51,7 +53,7 @@ export default function SportsMatchScreen() {
             {winner && (
                 <div className="mt-8 text-center">
                     <img src={winner.logoSrc} alt={winner.name} className="w-48 h-48 rounded-full mx-auto object-contain border-black border-4" />
-                    <p className="mt-2 text-lg font-semibold text-green-600">Winner!</p>
+                    <p className="mt-2 text-xl font-semibold text-green-600">Winner!</p>
                 </div>
             )}
         </div>
