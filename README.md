@@ -14,3 +14,4 @@ To-do list:
 - ~~Implement a front-facing webpage rather than using the jupyter notebook as an interface~~ - done!
 - Pull live NBA data rather than using a .csv obtained from Kaggle to train the model
 - Provide an API that can respond to requests directly sent to the web server.
+- Implement a similar machine learning model that will predict the outcome of MLB games
