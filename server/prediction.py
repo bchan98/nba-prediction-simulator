@@ -60,3 +60,8 @@ def prediction(homeName, awayName):
             return awayName
     except KeyError:
         print("Error finding teams.")
+
+
+# testcase 1 - hawks vs celtics to verify predictor can output values
+test1 = prediction("Atlanta Hawks", "Boston Celtics")
+print(test1)

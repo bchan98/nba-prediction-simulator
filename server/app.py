@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from prediction import prediction
+import prediction
+import random
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -15,18 +16,16 @@ def home():
 # Endpoint to get the winner of a match
 @app.route("/api/get-winner", methods=["GET"])
 def get_winner():
-    team1_id = request.args.get("team1Id")
-    team2_id = request.args.get("team2Id")
+    team1_name = request.args.get("team1Name")
+    team2_name = request.args.get("team2Name")
 
     # Simulate match logic (randomly pick a winner for this example)
-    #
-    if team1_id and team2_id:
-        winner = prediction(team1_id, team2_id)
+    if team1_name and team2_name:
+        winner = prediction.prediction(team1_name, team2_name)
         return jsonify({"winner": winner})
     else:
-        return jsonify({"error": "Invalid team IDs"}), 400
+        return jsonify({"error": "Invalid team names"}), 400
 
 
 if __name__ == "__main__":
     app.run(debug=True)
-
