@@ -25,7 +25,7 @@ export default function SportsMatchScreen() {
 
     function determineWinner() {
         if (team1 && team2) {
-            axios.get(`http://127.0.0.1:5000/api/get-winner?team1Name=${team1.name}&team2Name=${team2.name}`)
+            axios.get(`http://backend:5000/api/get-winner?team1Name=${team1.name}&team2Name=${team2.name}`)
                 .then(response => {
                     console.log('Match winner:', response.data);
                     if (response.data.winner === String(team1.name)) {

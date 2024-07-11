@@ -1,10 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import prediction
-import random
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+CORS(app, origins="http://localhost:3000")  # Enable CORS for all routes
 
 
 # A simple route to test the server

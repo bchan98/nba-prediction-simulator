@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
 import joblib
 
 gameurl = "https://raw.githubusercontent.com/bchan98/CapstoneProject/main/games.csv"
