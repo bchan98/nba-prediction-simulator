@@ -40,7 +40,7 @@ export default function SportsMatchScreen() {
     }
 
     return (
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col justify-center items-center w-2/3 space-y-4 bg-gray-200 rounded-md border-2 border-grey-400 p-8 m-4">
             <TeamSelect teams={teams} onSelectTeams={handleSelectTeams} />
             {team1 && team2 && (
                 <button
