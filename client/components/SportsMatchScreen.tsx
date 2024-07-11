@@ -24,19 +24,21 @@ export default function SportsMatchScreen() {
     };
 
     function determineWinner() {
-        axios.get(`http://localhost:5000/api/get-winner?team1Name=${team1.name}&team2Name=${team2.name}`)
-            .then(response => {
-                console.log('Match winner:', response.data);
-                if (response.data.winner === String(team1.name)) {
-                    setWinner(team1);
-                }
-                else {
-                    setWinner(team2);
-                }
-            })
-            .catch(error => {
-                console.error('Error getting match winner:', error);
-            });
+        if (team1 && team2) {
+            axios.get(`http://127.0.0.1:5000/api/get-winner?team1Name=${team1.name}&team2Name=${team2.name}`)
+                .then(response => {
+                    console.log('Match winner:', response.data);
+                    if (response.data.winner === String(team1.name)) {
+                        setWinner(team1);
+                    }
+                    else {
+                        setWinner(team2);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error getting match winner:', error);
+                });
+        }
     }
 
     return (
