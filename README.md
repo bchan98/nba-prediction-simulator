@@ -1,6 +1,8 @@
 # NBA Prediction Simulator
 
-This project is a machine learning model that predicts the win/loss outcome of an NBA game, given two teams. This project is available as a Jupyter Notebook, and as a web application, developed with Typescript and React for the front-end, Flask for the backend. If you'd like to run this notebook locally, you can download the .ipynb and the .csv files in this repository. You can deploy this application by cloning the repo and running docker-compose up.
+This project is a machine learning model that predicts the win/loss outcome of an NBA game, given two teams. This project is available as a Jupyter Notebook, and as a web application, developed with Typescript and React for the front-end, Flask for the backend. You can deploy this application by cloning the repo and running docker-compose up. Additionally, a link to the hosted Jupyter notebook is posted below:
+
+https://colab.research.google.com/drive/1rhVaOQxDPIYi5PsQ4DgFIpwfpiH5u0pt?usp=sharing
 
 This simulator implements a random forest classifier and uses a set of 8 predictors to predict the outcome of an NBA game. The machine learning model is trained on the '22 and '23 season of the NBA, playoffs included - the data was obtained from Kaggle.com from this link: https://www.kaggle.com/datasets/nathanlauga/nba-games - much thanks to Nathan Lauga. To make predictions on the outcomes of games, the notebook pulls statistics from the official NBA Stats API to obtain the predictors needed, before feeding them into the machine learning model to be predicted.
 
