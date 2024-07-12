@@ -1,14 +1,13 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 import prediction
 
 app = Flask(__name__)
-CORS(app, support_credentials=True)  # Enable CORS for all routes
+CORS(app, origins=["http://frontend:3000"])  # Enable CORS for all routes
 
 
 # A simple route to test the server
 @app.route("/")
-@cross_origin(supports_credentials=True)
 def home():
     return "Flask server is running!"
 
