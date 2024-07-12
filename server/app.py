@@ -1,13 +1,14 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import prediction
 
 app = Flask(__name__)
-CORS(app, origins="http://localhost:3000")  # Enable CORS for all routes
+CORS(app, support_credentials=True)  # Enable CORS for all routes
 
 
 # A simple route to test the server
 @app.route("/")
+@cross_origin(supports_credentials=True)
 def home():
     return "Flask server is running!"
 
@@ -27,4 +28,4 @@ def get_winner():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
