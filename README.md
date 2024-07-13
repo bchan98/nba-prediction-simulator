@@ -1,14 +1,13 @@
 # NBA Prediction Simulator
 
-This project is a machine learning model that predicts the win/loss outcome of an NBA game, given two teams. This project is available as a Jupyter Notebook, and as a web application. The web application uses Next.js for the front-end and Flask for the backend. You can access the webapp at the following link: 
+This project is a machine learning model that predicts the win/loss outcome of an NBA game, given two teams. This project is available as a Jupyter Notebook, and as a web application. The web application uses Next.js for the front-end and Flask for the backend.
 
-no link - currently resolving cors issue -  
 
 If you'd like to run this web application locally, you can retrieve the docker images for the web servers with these commands:
 
 ```
-docker pull bmkchan/nba-prediction-simulator_frontend:v0.1
-docker pull bmkchan/nba-prediction-simulator_backend:v0.1
+docker pull bmkchan/nba-prediction-simulator_frontend:v0.4
+docker pull bmkchan/nba-prediction-simulator_backend:v0.4
 ```
 
 After which you'll just need to modify the docker-compose file found in this repository to be able to the run docker-compose up command. Additionally, a link to the hosted Jupyter notebook is posted below:
