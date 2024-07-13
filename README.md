@@ -18,7 +18,6 @@ This simulator implements a random forest classifier and uses a set of 8 predict
 
 To be clear - this is not financial advice to make/take bets on the outcome of games. This is simply a project written for entertainment.
 
-
 Why write this?
 
 ![a5f](https://github.com/bchan98/nba-prediction-simulator/assets/89050093/010a1ffa-7c43-405a-a48f-6976defb4e3d)
@@ -26,6 +25,6 @@ Why write this?
 
 To-do list:
 - ~~Implement a front-facing webpage rather than using the jupyter notebook as an interface~~ - done!
+- ~~Provide an API that can respond to requests directly sent to the web server.~~ - done!
 - Pull live NBA data rather than using a .csv obtained from Kaggle to train the model
-- Provide an API that can respond to requests directly sent to the web server.
 - Implement a similar machine learning model that will predict the outcome of MLB games
