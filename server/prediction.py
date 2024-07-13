@@ -1,5 +1,7 @@
 import joblib
 import pandas as pd
+import os
+from dotenv import load_dotenv
 from nba_api.stats.endpoints import leaguedashteamstats
 
 modelPath = "model.pkl"
@@ -14,10 +16,14 @@ predictors = [
     "FG3_PCT_away_rolling",
 ]
 
+load_dotenv()
+
+http_proxy = os.getenv('HTTP_PROXY')
 
 def prediction(homeName, awayName):
     request = leaguedashteamstats.LeagueDashTeamStats(
-        last_n_games=5, per_mode_detailed="PerGame"
+        last_n_games=5, per_mode_detailed="PerGame",
+        proxy=http_proxy
     )
     foundStatistics = request.get_data_frames()[0]
 
