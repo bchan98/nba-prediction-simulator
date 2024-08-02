@@ -2,3 +2,4 @@
 model.pkl
 .env
 __pycache__/
+nba_stats.csv
