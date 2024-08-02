@@ -7,7 +7,7 @@ export default function Homebar() {
                 <li className="mb-2 md:p-4"><img src="/img/logo.png" /></li>
                 <li className="mb-2 md:p-4 text-lg"><a href="/">Home</a></li>
                 <li className="mb-2 md:p-4 text-lg"><a href="/nba">NBA</a></li>
-                <li className="mb-2 md:p-4 text-lg">MLB</li>
+                <li className="mb-2 md:p-4 text-lg">NHL</li>
             </ul>
         </div>
     )
