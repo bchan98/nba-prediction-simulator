@@ -1,8 +1,5 @@
 import joblib
 import pandas as pd
-import os
-from dotenv import load_dotenv
-from nba_api.stats.endpoints import leaguedashteamstats
 
 modelPath = "model.pkl"
 predictors = [
@@ -16,17 +13,9 @@ predictors = [
     "FG3_PCT_away_rolling",
 ]
 
-load_dotenv()
-
-http_proxy = os.getenv('HTTP_PROXY')
 
 def prediction(homeName, awayName):
-    request = leaguedashteamstats.LeagueDashTeamStats(
-        last_n_games=5, per_mode_detailed="PerGame",
-        proxy=http_proxy
-    )
-    foundStatistics = request.get_data_frames()[0]
-
+    foundStatistics = pd.read_csv("nba_stats.csv")
     rfPredictor = joblib.load(modelPath)
 
     try:
@@ -68,6 +57,5 @@ def prediction(homeName, awayName):
         print("Error finding teams.")
 
 
-# testcase 1 - hawks vs celtics to verify predictor can output values
 test1 = prediction("Atlanta Hawks", "Boston Celtics")
 print(test1)
