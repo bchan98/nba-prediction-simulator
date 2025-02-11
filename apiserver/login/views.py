@@ -2,6 +2,8 @@ from rest_framework.response import Response
 from rest_framework import status, generics
 from .models import User
 from .serializers import UserSerializer, LoginSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import authenticate
 
 
 class RegisterView(generics.CreateAPIView):
@@ -17,7 +19,36 @@ class LoginView(generics.GenericAPIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
+        # check input is valid
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
+        # debugging
+        print("Validated Data:", serializer.validated_data)
+
+        # if valid, try to authenticate data
+        user = authenticate(
+            username=serializer.validated_data["username"],
+            password=serializer.validated_data["password"],
+        )
+        # if user is authenticated, pass jwt token + refresh
+        if user:
+            refresh = RefreshToken.for_user(user)
+            access_token = str(refresh.access_token)
+
+            return Response(
+                {
+                    "access": access_token,
+                    "refresh": str(refresh),
+                    "user": {
+                        "id": user.id,
+                        "username": user.username,
+                    },
+                },
+                status=status.HTTP_200_OK,
+            )
+        # if user not active, give wrong response
+        return Response(
+            {"error": "Invalid credentials given"},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )

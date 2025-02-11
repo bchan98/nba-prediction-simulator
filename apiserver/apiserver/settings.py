@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,11 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = "login.User"
+
+SIMPE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),  # 1 hour token expire 19:54
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # 7 day refresh toekn expire
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

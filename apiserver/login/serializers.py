@@ -7,7 +7,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = ["id", "username", "password"]
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -24,4 +24,4 @@ class LoginSerializer(serializers.Serializer):
         user = authenticate(username=attrs["username"], password=attrs["password"])
         if not user:
             raise serializers.ValidationError("Invalid credentials")
-        return {"id": user.id, "username": user.username}
+        return {"id": user.id, "username": user.username, "password": user.password}
