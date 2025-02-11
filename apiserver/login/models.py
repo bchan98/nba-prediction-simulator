@@ -27,9 +27,9 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=150, unique=True)
     password = models.CharField(max_length=128)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)  # type: ignore
+    is_staff = models.BooleanField(default=False)  # type: ignore
+    is_superuser = models.BooleanField(default=False)  # type: ignore
 
     objects = UserManager()
 
